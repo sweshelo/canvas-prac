@@ -1,29 +1,19 @@
-class DrawObj{
-    constructor(id){
-        this.id = id;
-        this.img = new Image();
-        this.img.src = "cards/10001.jpg";
-    }
-}
-
-
 (()=>{
-    const cardW = 640;
-    const cardH = 901;
+    const ww = $("#canvas-container").width();
+    const wh = ww/16*9;
 
-    const canvas = document.getElementById("app");
-    const ctx = canvas.getContext("2d");
+    $("#app").attr("width",ww);
+    $("#app").attr("height",wh);
 
-    var w = $('#canvas-container').width();
-    var h = w/16*9;
-    $('#app').attr('width', w);
-    $('#app').attr('height', h);
+    console.log(ww, wh);
 
-    C = new DrawObj(0);
-    C.img.onload = ()=>{
-        ctx.drawImage(C.img, 100, h-cardH/5-10, cardW/5, cardH/5);
-        console.log("drew");
-    }
+    var canvas = new createjs.Stage("app");
+    var img = new createjs.Bitmap("./cards/10001.jpg");
+    img.onload = ()=>{canvas.update()};
+    canvas.addChild(img);
 
-    console.log(C);
 })();
+
+function loadImage(path){
+    const img = new createjs.Bitmap(path);
+}
