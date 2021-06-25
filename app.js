@@ -23,13 +23,22 @@
         obj.y = 0;
     }
 
-    var img = new createjs.Bitmap("./cards/10001.jpg");
-    img.scaleX = 0.2;
-    img.scaleY = 0.2;
-    img.addEventListener("mousedown", ()=>{cardClick(img)});
-    img.addEventListener("pressmove", ()=>{cardMove(img)});
-    img.addEventListener("pressup", ()=>{cardRelease(img)});
-    stage.addChild(img);
+    class Card{
+        constructor(path){
+            this.img = new createjs.Bitmap(path);
+            this.img.scaleX = 0.2;
+            this.img.scaleY = 0.2;
+            this.img.addEventListener("mousedown", ()=>{cardClick(this.img)});
+            this.img.addEventListener("pressmove", ()=>{cardMove(this.img)});
+            this.img.addEventListener("pressup", ()=>{cardRelease(this.img)});
+            stage.addChild(this.img);
+            console.log('born.')
+        }
+    }
+
+    var c1 = new Card("./cards/10001.jpg");
+    var c2 = new Card("./cards/10002.jpg");
+    var c3 = new Card("./cards/10003.jpg");
 
     const handleTick = ()=>{
         stage.update();
@@ -40,9 +49,3 @@
     createjs.Ticker.addEventListener("tick", handleTick);
 
 })();
-
-function loadImage(path){
-    const img = new createjs.Bitmap(path);
-}
-
-
